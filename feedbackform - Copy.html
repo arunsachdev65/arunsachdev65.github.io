@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Teacher Feedback Form</title>
+  <style>
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, sans-serif;
+      background-image: url('bgproject.jpg'); 
+      background-size: cover; 
+      padding: 20px;
+      
+    }
+
+    .form-container {
+      max-width: 500px;
+      height: 350px;
+      margin: 0 auto;
+      background-color: rgb(13, 54, 65);
+      padding: 20px;
+      top: 50%;
+      left: 50%;
+      transform: translate(2%, 25%);
+      border-radius: 30px;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+      border: 6px solid black;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      margin-top: 8%;
+      color: white;
+    }
+
+    .form-group {
+      margin-bottom: 6px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bolder;
+      margin-bottom: 10px;
+      margin-top: 30px;
+      color: white;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+    }
+
+    .rating span {
+      font-size: 24px;
+      color: black;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .rating span:hover,
+    .rating span.active {
+      color: #640000;
+    }
+
+    .form-group button {
+      background-color: #4c0908;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .form-group button:hover {
+      background-color: #af9393;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Teacher Feedback Form</h2>
+    <form id="feedbackForm">
+      <div class="form-group">
+        <label for="feedback">Feedback:</label>
+        <textarea id="feedback" name="feedback" placeholder="Enter your feedback here" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating:</label>
+        <div class="rating" id="ratingStars">
+          <span>&#9733;</span>
+          <span>&#9733;</span>
+          <span>&#9733;</span>
+          <span>&#9733;</span>
+          <span>&#9733;</span>
+        </div>
+        <input type="hidden" id="ratingValue" name="rating" required>
+      </div>
+      <div class="form-group">
+        <button type="submit">Submit Feedback</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    var ratingStars = document.querySelectorAll("#ratingStars span");
+    var ratingValue = document.getElementById("ratingValue");
+
+    ratingStars.forEach(function(star, index) {
+      star.addEventListener("click", function() {
+        ratingStars.forEach(function(s, i) {
+          if (i <= index) {
+            s.classList.add("active");
+          } else {
+            s.classList.remove("active");
+          }
+        });
+        ratingValue.value = index + 1;
+      });
+    });
+
+    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var feedback = document.getElementById("feedback").value;
+      var rating = ratingValue.value;
+
+      if (!rating) {
+        alert("Please provide a rating.");
+        return;
+      }
+
+      alert("Thank you for your feedback!");
+      document.getElementById("feedbackForm").reset();
+      ratingStars.forEach(function(star) {
+        star.classList.remove("active");
+      });
+    });
+  </script>
+</body>
+</html>

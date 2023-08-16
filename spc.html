@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stone Paper Scissors</title>
+</head>
+<body>
+  <h1>Stone Paper Scissors</h1>
+
+  <p>Make your choice:</p>
+
+  <button onclick="play('stone')">Stone</button>
+  <button onclick="play('paper')">Paper</button>
+  <button onclick="play('scissors')">Scissors</button>
+
+  <p id="result"></p>
+
+  <script>
+    function play(userChoice) {
+      // Generate a random choice for the computer
+      const choices = ['stone', 'paper', 'scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+      // Compare the choices and determine the winner
+      let result;
+      if (userChoice === computerChoice) {
+        result = "It's a tie!";
+      } else if (
+        (userChoice === 'stone' && computerChoice === 'scissors') ||
+        (userChoice === 'paper' && computerChoice === 'stone') ||
+        (userChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        result = 'You win!';
+      } else {
+        result = 'You lose!';
+      }
+
+      // Display the result
+      document.getElementById('result').textContent = `You chose ${userChoice}. The computer chose ${computerChoice}. ${result}`;
+    }
+  </script>
+</body>
+</html>
